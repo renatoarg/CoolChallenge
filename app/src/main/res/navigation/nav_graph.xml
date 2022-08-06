@@ -7,16 +7,24 @@
 
     <fragment
         android:id="@+id/employeesListFragment"
-        android:name="renatoarg.telluschallenge.EmployeesListFragment"
+        android:name="renatoarg.telluschallenge.employeesList.EmployeesListFragment"
         android:label="fragment_employees_list"
         tools:layout="@layout/fragment_employees_list" >
         <action
             android:id="@+id/action_employeesListFragment_to_employeeDetailsFragment"
             app:destination="@id/employeeDetailsFragment" />
+        <action
+            android:id="@+id/action_employeesListFragment_to_apiErrorFragment"
+            app:destination="@id/apiErrorFragment" />
     </fragment>
     <fragment
         android:id="@+id/employeeDetailsFragment"
-        android:name="renatoarg.telluschallenge.EmployeeDetailsFragment"
+        android:name="renatoarg.telluschallenge.employeeDetails.EmployeeDetailsFragment"
         android:label="fragment_employee_details"
         tools:layout="@layout/fragment_employee_details" />
+    <fragment
+        android:id="@+id/apiErrorFragment"
+        android:name="renatoarg.telluschallenge.apiError.ApiErrorFragment"
+        android:label="fragment_api_error"
+        tools:layout="@layout/fragment_api_error" />
 </navigation>
