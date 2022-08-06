@@ -10,4 +10,8 @@ sealed class EmployeeState {
         val employees: List<Employee>
     ) : EmployeeState()
 
+    data class OnLoading(
+        val isLoading: Boolean
+    ) : EmployeeState()
+
 }
