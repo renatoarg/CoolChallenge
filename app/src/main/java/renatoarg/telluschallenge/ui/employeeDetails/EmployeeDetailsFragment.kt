@@ -11,11 +11,12 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import renatoarg.telluschallenge.databinding.FragmentEmployeeDetailsBinding
 import renatoarg.telluschallenge.model.Employee
+import renatoarg.telluschallenge.ui.base.BaseFragment
 import renatoarg.telluschallenge.ui.employeesList.EmployeeState
 import renatoarg.telluschallenge.ui.employeesList.EmployeesViewModel
 
 @AndroidEntryPoint
-class EmployeeDetailsFragment : Fragment() {
+class EmployeeDetailsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentEmployeeDetailsBinding
 
@@ -60,7 +61,14 @@ class EmployeeDetailsFragment : Fragment() {
     }
 
     private fun onApiError() {
-        binding.wrapperLayout.isVisible = true
+        showAlertDialog(
+            { // positive button
+                viewModel.fetchEmployee(args.employee.id)
+            },
+            { // negative button
+                finish()
+            }
+        )
     }
 
     private fun onLoading(isLoading: Boolean) {

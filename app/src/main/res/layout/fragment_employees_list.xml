@@ -6,56 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".ui.employeesList.EmployeesListFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/errorLayout"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeToRefreshLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/white"
-        android:clickable="true"
-        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
-            android:text="Something went wrong"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/employeesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EEEEEE"
+            android:orientation="vertical"
+            android:paddingTop="2dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_employee" />
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_api_error"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/employeesRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#EEEEEE"
-        android:orientation="vertical"
-        android:paddingTop="2dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="5"
-        tools:listitem="@layout/item_employee" />
-
-    <include layout="@layout/loading_layout"
-        android:id="@+id/loading"/>
+    <include
+        android:id="@+id/loading"
+        layout="@layout/loading_layout"
+        tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

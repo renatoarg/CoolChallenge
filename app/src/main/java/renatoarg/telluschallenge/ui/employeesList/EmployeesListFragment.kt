@@ -1,23 +1,23 @@
 package renatoarg.telluschallenge.ui.employeesList
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import renatoarg.telluschallenge.databinding.FragmentEmployeesListBinding
 import renatoarg.telluschallenge.model.Employee
+import renatoarg.telluschallenge.ui.base.BaseFragment
 import renatoarg.telluschallenge.ui.employeesList.adapter.EmployeesAdapter
 
 @AndroidEntryPoint
-class EmployeesListFragment : Fragment() {
+class EmployeesListFragment : BaseFragment() {
 
     private lateinit var binding: FragmentEmployeesListBinding
+
     private val adapter = EmployeesAdapter(callBack = { employee ->
         findNavController().navigate(
             EmployeesListFragmentDirections.actionEmployeesListFragmentToEmployeeDetailsFragment(employee)
@@ -42,7 +42,16 @@ class EmployeesListFragment : Fragment() {
     }
 
     private fun setupUi() {
-        binding.employeesRecyclerView.adapter = adapter
+        binding.run {
+            // RecyclerView Adapter
+            employeesRecyclerView.adapter = adapter
+
+            // Swipe to refresh
+            swipeToRefreshLayout.setOnRefreshListener {
+                viewModel.fetchEmployees()
+                swipeToRefreshLayout.isRefreshing = false
+            }
+        }
     }
 
     private fun observeViewModel() {
@@ -58,17 +67,27 @@ class EmployeesListFragment : Fragment() {
         }
     }
 
+    private fun onApiError() {
+        adapter.resetList(emptyList())
+        showAlertDialog(
+            { // positive button
+                viewModel.fetchEmployees()
+            },
+            { // negative button
+                finish()
+            }
+        )
+    }
+
     private fun onFetchEmployees(employees: List<Employee>) {
         adapter.resetList(employees)
         binding.employeesRecyclerView.isVisible = true
     }
 
-    private fun onApiError() {
-        binding.employeesRecyclerView.isVisible = false
-    }
-
     private fun onLoading(isLoading: Boolean) {
-        binding.loading.loadingLayout.isVisible = isLoading
+        binding.run {
+            loading.loadingLayout.isVisible = isLoading
+        }
     }
 
 }

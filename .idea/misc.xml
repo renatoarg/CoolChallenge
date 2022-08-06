@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/layout/fragment_employees_list.xml" value="0.2630208333333333" />
         <entry key="app/src/main/res/layout/item_employee.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/loading_layout.xml" value="0.3546875" />
+        <entry key="app/src/main/res/layout/something_went_wrong.xml" value="0.3546875" />
       </map>
     </option>
   </component>

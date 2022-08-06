@@ -8,8 +8,7 @@
     <fragment
         android:id="@+id/employeesListFragment"
         android:name="renatoarg.telluschallenge.ui.employeesList.EmployeesListFragment"
-        android:label="fragment_employees_list"
-        tools:layout="@layout/fragment_employees_list" >
+        tools:layout="@layout/fragment_employees_list">
         <action
             android:id="@+id/action_employeesListFragment_to_employeeDetailsFragment"
             app:destination="@id/employeeDetailsFragment" />
@@ -17,8 +16,7 @@
     <fragment
         android:id="@+id/employeeDetailsFragment"
         android:name="renatoarg.telluschallenge.ui.employeeDetails.EmployeeDetailsFragment"
-        android:label="fragment_employee_details"
-        tools:layout="@layout/fragment_employee_details" >
+        tools:layout="@layout/fragment_employee_details">
         <argument
             android:name="employee"
             app:argType="renatoarg.telluschallenge.model.Employee" />
