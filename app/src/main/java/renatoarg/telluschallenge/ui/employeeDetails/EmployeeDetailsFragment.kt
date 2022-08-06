@@ -1,4 +1,4 @@
-package renatoarg.telluschallenge.employeesList
+package renatoarg.telluschallenge.ui.employeeDetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,19 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
-import renatoarg.telluschallenge.databinding.FragmentEmployeesListBinding
+import renatoarg.telluschallenge.databinding.FragmentEmployeeDetailsBinding
 
 @AndroidEntryPoint
-class EmployeesListFragment : Fragment() {
+class EmployeeDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentEmployeesListBinding
+    private lateinit var binding: FragmentEmployeeDetailsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentEmployeesListBinding.inflate(layoutInflater)
+        binding = FragmentEmployeeDetailsBinding.inflate(layoutInflater)
         return binding.root
     }
-
 }

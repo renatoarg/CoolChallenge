@@ -1,0 +1,13 @@
+package renatoarg.telluschallenge.ui.employeesList
+
+import renatoarg.telluschallenge.model.Employee
+
+sealed class EmployeeState {
+
+    object OnApiError : EmployeeState()
+
+    data class OnFetchEmployees(
+        val employees: List<Employee>
+    ) : EmployeeState()
+
+}

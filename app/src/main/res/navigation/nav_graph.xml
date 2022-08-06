@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/employeesListFragment"
-        android:name="renatoarg.telluschallenge.employeesList.EmployeesListFragment"
+        android:name="renatoarg.telluschallenge.ui.employeesList.EmployeesListFragment"
         android:label="fragment_employees_list"
         tools:layout="@layout/fragment_employees_list" >
         <action
@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/employeeDetailsFragment"
-        android:name="renatoarg.telluschallenge.employeeDetails.EmployeeDetailsFragment"
+        android:name="renatoarg.telluschallenge.ui.employeeDetails.EmployeeDetailsFragment"
         android:label="fragment_employee_details"
         tools:layout="@layout/fragment_employee_details" />
     <fragment
         android:id="@+id/apiErrorFragment"
-        android:name="renatoarg.telluschallenge.apiError.ApiErrorFragment"
+        android:name="renatoarg.telluschallenge.ui.apiError.ApiErrorFragment"
         android:label="fragment_api_error"
         tools:layout="@layout/fragment_api_error" />
 </navigation>
