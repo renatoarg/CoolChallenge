@@ -8,4 +8,6 @@ class EmployeesRepository @Inject constructor(private val employeesApi: Employee
 
     suspend fun getEmployees() = employeesApi.getEmployees()
 
+    suspend fun getEmployee(id: Long) = employeesApi.getEmployee(id)
+
 }

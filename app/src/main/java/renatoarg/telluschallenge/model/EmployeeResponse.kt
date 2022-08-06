@@ -8,5 +8,5 @@ import kotlinx.parcelize.Parcelize
 data class EmployeeResponse(
     override val status: String = "",
     override val message: String = "",
-    val data: Employee? = null
+    val data: Employee
 ) : EmployeesResponseWrapper(), Parcelable

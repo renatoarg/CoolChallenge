@@ -34,6 +34,26 @@ class EmployeesViewModel @Inject constructor(
         }
     }
 
+    fun fetchEmployee(id: Long) {
+        GlobalScope.launch {
+            emitEmployeeState(EmployeeState.OnLoading(true))
+
+            val response = employeesRepository.getEmployee(id)
+            when (response.isSuccessful) {
+                true -> {
+                    response.body()?.let {
+                        emitEmployeeState(EmployeeState.OnFetchEmployee(it.data))
+                    } ?: run {
+                        emitEmployeeState(EmployeeState.OnApiError)
+                    }
+                }
+                false -> EmployeeState.OnApiError
+            }
+
+            emitEmployeeState(EmployeeState.OnLoading(false))
+        }
+    }
+
     private fun emitEmployeeState(state: EmployeeState) {
         CoroutineScope(Dispatchers.Main).launch {
             employeesLiveData.value = state

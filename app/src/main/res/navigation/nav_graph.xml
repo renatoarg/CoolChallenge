@@ -13,18 +13,14 @@
         <action
             android:id="@+id/action_employeesListFragment_to_employeeDetailsFragment"
             app:destination="@id/employeeDetailsFragment" />
-        <action
-            android:id="@+id/action_employeesListFragment_to_apiErrorFragment"
-            app:destination="@id/apiErrorFragment" />
     </fragment>
     <fragment
         android:id="@+id/employeeDetailsFragment"
         android:name="renatoarg.telluschallenge.ui.employeeDetails.EmployeeDetailsFragment"
         android:label="fragment_employee_details"
-        tools:layout="@layout/fragment_employee_details" />
-    <fragment
-        android:id="@+id/apiErrorFragment"
-        android:name="renatoarg.telluschallenge.ui.apiError.ApiErrorFragment"
-        android:label="fragment_api_error"
-        tools:layout="@layout/fragment_api_error" />
+        tools:layout="@layout/fragment_employee_details" >
+        <argument
+            android:name="employee"
+            app:argType="renatoarg.telluschallenge.model.Employee" />
+    </fragment>
 </navigation>

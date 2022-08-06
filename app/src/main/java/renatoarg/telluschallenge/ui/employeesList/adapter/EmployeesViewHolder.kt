@@ -11,9 +11,12 @@ class EmployeeViewHolder(
 
     override fun bind(item: Employee) {
         binding.apply {
-            nameTextView.text = item.employee_name
-            salaryTextView.text = item.employee_salary.toString()
-            ageTextView.text = item.employee_age.toString()
+            nameTextView.text = item.name
+            salaryTextView.text = item.salary.toString()
+            ageTextView.text = item.age.toString()
+            itemLayout.setOnClickListener {
+                callBack(item)
+            }
         }
     }
 }

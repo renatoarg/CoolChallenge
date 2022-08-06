@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import renatoarg.telluschallenge.databinding.FragmentEmployeesListBinding
 import renatoarg.telluschallenge.model.Employee
@@ -18,7 +19,9 @@ class EmployeesListFragment : Fragment() {
 
     private lateinit var binding: FragmentEmployeesListBinding
     private val adapter = EmployeesAdapter(callBack = { employee ->
-
+        findNavController().navigate(
+            EmployeesListFragmentDirections.actionEmployeesListFragmentToEmployeeDetailsFragment(employee)
+        )
     })
 
     private val viewModel: EmployeesViewModel by activityViewModels()
@@ -44,11 +47,13 @@ class EmployeesListFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.employeesState.observe(viewLifecycleOwner) { employeeState ->
-            Log.i("MONSTRO", "$employeeState")
-            when(employeeState) {
+            when (employeeState) {
                 is EmployeeState.OnFetchEmployees -> onFetchEmployees(employeeState.employees)
                 is EmployeeState.OnApiError -> onApiError()
                 is EmployeeState.OnLoading -> onLoading(employeeState.isLoading)
+                else -> {
+                    // do nothing
+                }
             }
         }
     }
@@ -63,7 +68,7 @@ class EmployeesListFragment : Fragment() {
     }
 
     private fun onLoading(isLoading: Boolean) {
-        binding.loadingLayout.isVisible = isLoading
+        binding.loading.loadingLayout.isVisible = isLoading
     }
 
 }

@@ -55,26 +55,7 @@
         tools:itemCount="5"
         tools:listitem="@layout/item_employee" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/loadingLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/white"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ProgressBar
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include layout="@layout/loading_layout"
+        android:id="@+id/loading"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
