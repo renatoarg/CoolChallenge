@@ -24,4 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
+
+    fun setTitle(title: String) {
+        binding.toolbarTitle.text = title
+    }
 }

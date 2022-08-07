@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_night_mode.xml" value="0.2505" />
         <entry key="app/src/main/res/drawable/ic_user_placeholder.xml" value="0.3005" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3265625" />
         <entry key="app/src/main/res/layout/fragment_api_error.xml" value="0.34375" />
@@ -11,6 +12,7 @@
         <entry key="app/src/main/res/layout/item_employee.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/loading_layout.xml" value="0.3546875" />
         <entry key="app/src/main/res/layout/something_went_wrong.xml" value="0.3546875" />
+        <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.37395833333333334" />
       </map>
     </option>
   </component>

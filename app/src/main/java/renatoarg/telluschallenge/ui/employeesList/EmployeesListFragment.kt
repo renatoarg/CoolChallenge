@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import renatoarg.telluschallenge.MainActivity
+import renatoarg.telluschallenge.R
 import renatoarg.telluschallenge.databinding.FragmentEmployeesListBinding
 import renatoarg.telluschallenge.model.Employee
 import renatoarg.telluschallenge.ui.employeesList.adapter.EmployeesAdapter
@@ -18,13 +20,14 @@ class EmployeesListFragment : Fragment() {
 
     private lateinit var binding: FragmentEmployeesListBinding
 
+    private val viewModel: EmployeesViewModel by activityViewModels()
+
     private val adapter = EmployeesAdapter(onEmployeeClicked = { employee ->
+        setTitle("")
         findNavController().navigate(
             EmployeesListFragmentDirections.actionEmployeesListFragmentToEmployeeDetailsFragment(employee)
         )
     })
-
-    private val viewModel: EmployeesViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,16 +45,18 @@ class EmployeesListFragment : Fragment() {
     }
 
     private fun setupUi() {
+        setTitle(getString(R.string.tellus_challenge))
         binding.run {
-            // RecyclerView Adapter
             employeesRecyclerView.adapter = adapter
-
-            // Swipe to refresh
             swipeToRefreshLayout.setOnRefreshListener {
                 fetchRefreshedEmployees()
                 swipeToRefreshLayout.isRefreshing = false
             }
         }
+    }
+
+    private fun setTitle(title: String) {
+        (requireActivity() as MainActivity).setTitle(title)
     }
 
     private fun observeViewModel() {
@@ -82,5 +87,4 @@ class EmployeesListFragment : Fragment() {
     private fun onLoading(isLoading: Boolean) {
         binding.loadingLayout.isVisible = isLoading
     }
-
 }

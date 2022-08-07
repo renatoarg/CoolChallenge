@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import renatoarg.telluschallenge.databinding.FragmentApiErrorBinding
 import renatoarg.telluschallenge.ui.employeesList.EmployeesViewModel
@@ -29,17 +28,18 @@ class ApiErrorFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.run {
+            // Retry button
             retryButton.setOnClickListener {
                 dismiss()
                 viewModel.setRefresh()
                 viewModel.fetchEmployees()
             }
+            // Exit button
             exitButton.setOnClickListener {
                 dismiss()
                 requireActivity().finish()
             }
         }
-
     }
 
 }

@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import coil.load
+import coil.transform.CircleCropTransformation
 import dagger.hilt.android.AndroidEntryPoint
 import renatoarg.telluschallenge.R
 import renatoarg.telluschallenge.databinding.FragmentEmployeeDetailsBinding
 import renatoarg.telluschallenge.model.Employee
 import renatoarg.telluschallenge.ui.toUsdCurrency
-import java.text.NumberFormat
-import java.util.Currency
 
 @AndroidEntryPoint
 class EmployeeDetailsFragment : Fragment() {
@@ -41,6 +41,11 @@ class EmployeeDetailsFragment : Fragment() {
                 nameTextView.text = name
                 salaryTextView.text = getString(R.string.salary_value, salary.toUsdCurrency())
                 ageTextView.text = getString(R.string.age_value, age)
+
+                if (image.isEmpty()) return
+                userImageView.load(image) {
+                    transformations(CircleCropTransformation())
+                }
             }
         }
     }

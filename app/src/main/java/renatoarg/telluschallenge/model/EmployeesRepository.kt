@@ -14,7 +14,4 @@ class EmployeesRepository @Inject constructor(private val employeesApi: Employee
         return employeesApi.getEmployees()
     }
 
-    @Deprecated("Use employees list. It already contains all employees. Avoid too many requests!!")
-    suspend fun getEmployee(id: Long) = employeesApi.getEmployee(id)
-
 }

@@ -4,14 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import renatoarg.telluschallenge.model.EmployeesRepository
 import javax.inject.Inject
 
-@OptIn(DelicateCoroutinesApi::class)
 @HiltViewModel
 class EmployeesViewModel @Inject constructor(
     private val employeesRepository: EmployeesRepository
@@ -22,23 +19,19 @@ class EmployeesViewModel @Inject constructor(
 
     fun fetchEmployees() {
         if (!employeesRepository.isRefresh) return
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             emitEmployeeState(EmployeeState.OnLoading(true))
             val response = employeesRepository.getEmployees()
             emitEmployeeState(
-                when (response.isSuccessful) {
-                    true -> EmployeeState.OnFetchEmployees(response.body()?.data.orEmpty())
-                    false -> EmployeeState.OnApiError
-                }
+                if (response.isSuccessful) EmployeeState.OnFetchEmployees(response.body()?.data.orEmpty())
+                else EmployeeState.OnApiError
             )
             emitEmployeeState(EmployeeState.OnLoading(false))
         }
     }
 
     private fun emitEmployeeState(state: EmployeeState) {
-        CoroutineScope(Dispatchers.Main).launch {
-            employeesLiveData.value = state
-        }
+        CoroutineScope(Dispatchers.Main).launch { employeesLiveData.value = state }
     }
 
     fun setRefresh() {
