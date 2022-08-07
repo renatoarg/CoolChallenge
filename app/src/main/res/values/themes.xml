@@ -15,7 +15,7 @@
         <item name="toolbarStyle">@style/AppTheme.Toolbar</item>
     </style>
 
-    <style name="AppTheme.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+    <style name="AppTheme.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">?colorPrimary</item>
         <item name="titleTextColor">?colorOnPrimary</item>
         <item name="colorControlNormal">?colorOnPrimary</item>

@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class EmployeesResponse(
-    override val status: String = "",
-    override val message: String = "",
+    val status: String = "",
+    val message: String = "",
     val data: List<Employee> = emptyList()
-) : EmployeesResponseWrapper(), Parcelable
+) : Parcelable

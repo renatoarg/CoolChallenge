@@ -8,17 +8,33 @@
     <fragment
         android:id="@+id/employeesListFragment"
         android:name="renatoarg.telluschallenge.ui.employeesList.EmployeesListFragment"
+        android:label="@string/tellus_challenge"
         tools:layout="@layout/fragment_employees_list">
         <action
             android:id="@+id/action_employeesListFragment_to_employeeDetailsFragment"
-            app:destination="@id/employeeDetailsFragment" />
+            app:destination="@id/employeeDetailsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_employeesListFragment_to_apiErrorFragment"
+            app:destination="@id/apiErrorFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/employeeDetailsFragment"
         android:name="renatoarg.telluschallenge.ui.employeeDetails.EmployeeDetailsFragment"
+        android:label=""
         tools:layout="@layout/fragment_employee_details">
         <argument
             android:name="employee"
             app:argType="renatoarg.telluschallenge.model.Employee" />
     </fragment>
+
+    <dialog
+        android:id="@+id/apiErrorFragment"
+        android:name="renatoarg.telluschallenge.ui.apiError.ApiErrorFragment"
+        android:label="fragment_api_error"
+        tools:layout="@layout/fragment_api_error" />
 </navigation>

@@ -2,42 +2,80 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wrapperLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".ui.employeeDetails.EmployeeDetailsFragment"
-    android:id="@+id/wrapperLayout">
+    tools:context=".ui.employeeDetails.EmployeeDetailsFragment">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/cd_user_picture"
+        android:src="@drawable/ic_user_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/nameTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:text="Name" />
+
+    <TextView
+        android:id="@+id/salaryTextViewWrapper"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
+        android:background="#EEEEEE"
+        android:padding="8dp"
+        android:text="@string/salary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
 
     <TextView
         android:id="@+id/salaryTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toBottomOf="@+id/salaryTextViewWrapper"
+        app:layout_constraintEnd_toEndOf="@+id/salaryTextViewWrapper"
+        app:layout_constraintStart_toStartOf="@+id/salaryTextViewWrapper"
+        tools:text="$1000000" />
+
+    <TextView
+        android:id="@+id/ageTextViewWrapper"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
+        android:background="#EEEEEE"
+        android:padding="8dp"
+        android:text="@string/age"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
-        tools:text="Salary" />
+        app:layout_constraintTop_toBottomOf="@+id/salaryTextViewWrapper"
+        app:layout_goneMarginTop="16dp" />
 
     <TextView
         android:id="@+id/ageTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/salaryTextView"
-        tools:text="Age" />
-
-    <include layout="@layout/loading_layout"
-        android:id="@+id/loading"/>
+        android:padding="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toBottomOf="@+id/ageTextViewWrapper"
+        app:layout_constraintEnd_toEndOf="@+id/ageTextViewWrapper"
+        app:layout_constraintStart_toStartOf="@+id/ageTextViewWrapper"
+        tools:text="66 years" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

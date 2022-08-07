@@ -1,5 +1,6 @@
 package renatoarg.telluschallenge.ui.employeesList.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import renatoarg.telluschallenge.databinding.ItemEmployeeBinding
 import renatoarg.telluschallenge.model.Employee
 
 class EmployeesAdapter(
-    private val callBack: (Employee) -> Unit
+    private val onEmployeeClicked: (Employee) -> Unit
 ) : RecyclerView.Adapter<EmployeesAdapter.BaseViewHolder<*>>() {
 
     private var items = ArrayList<Employee>()
@@ -23,7 +24,7 @@ class EmployeesAdapter(
                 val itemBinding = ItemEmployeeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 EmployeeViewHolder(
                     itemBinding,
-                    callBack
+                    onEmployeeClicked
                 )
             }
             else -> throw IllegalArgumentException("Invalid view type")
@@ -44,6 +45,7 @@ class EmployeesAdapter(
         return items.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun resetList(employees: List<Employee>) {
         this.items.clear()
         this.items.addAll(employees)

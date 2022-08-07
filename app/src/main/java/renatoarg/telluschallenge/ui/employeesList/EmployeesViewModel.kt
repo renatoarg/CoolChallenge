@@ -21,35 +21,16 @@ class EmployeesViewModel @Inject constructor(
     val employeesState = employeesLiveData
 
     fun fetchEmployees() {
+        if (!employeesRepository.isRefresh) return
         GlobalScope.launch {
             emitEmployeeState(EmployeeState.OnLoading(true))
             val response = employeesRepository.getEmployees()
             emitEmployeeState(
                 when (response.isSuccessful) {
-                    true -> EmployeeState.OnFetchEmployees(response.body()?.data ?: emptyList())
+                    true -> EmployeeState.OnFetchEmployees(response.body()?.data.orEmpty())
                     false -> EmployeeState.OnApiError
                 }
             )
-            emitEmployeeState(EmployeeState.OnLoading(false))
-        }
-    }
-
-    fun fetchEmployee(id: Long) {
-        GlobalScope.launch {
-            emitEmployeeState(EmployeeState.OnLoading(true))
-
-            val response = employeesRepository.getEmployee(id)
-            when (response.isSuccessful) {
-                true -> {
-                    response.body()?.let {
-                        emitEmployeeState(EmployeeState.OnFetchEmployee(it.data))
-                    } ?: run {
-                        emitEmployeeState(EmployeeState.OnApiError)
-                    }
-                }
-                false -> EmployeeState.OnApiError
-            }
-
             emitEmployeeState(EmployeeState.OnLoading(false))
         }
     }
@@ -60,4 +41,7 @@ class EmployeesViewModel @Inject constructor(
         }
     }
 
+    fun setRefresh() {
+        employeesRepository.isRefresh = true
+    }
 }

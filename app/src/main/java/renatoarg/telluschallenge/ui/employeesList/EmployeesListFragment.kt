@@ -5,20 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import renatoarg.telluschallenge.databinding.FragmentEmployeesListBinding
 import renatoarg.telluschallenge.model.Employee
-import renatoarg.telluschallenge.ui.base.BaseFragment
 import renatoarg.telluschallenge.ui.employeesList.adapter.EmployeesAdapter
 
 @AndroidEntryPoint
-class EmployeesListFragment : BaseFragment() {
+class EmployeesListFragment : Fragment() {
 
     private lateinit var binding: FragmentEmployeesListBinding
 
-    private val adapter = EmployeesAdapter(callBack = { employee ->
+    private val adapter = EmployeesAdapter(onEmployeeClicked = { employee ->
         findNavController().navigate(
             EmployeesListFragmentDirections.actionEmployeesListFragmentToEmployeeDetailsFragment(employee)
         )
@@ -48,7 +48,7 @@ class EmployeesListFragment : BaseFragment() {
 
             // Swipe to refresh
             swipeToRefreshLayout.setOnRefreshListener {
-                viewModel.fetchEmployees()
+                fetchRefreshedEmployees()
                 swipeToRefreshLayout.isRefreshing = false
             }
         }
@@ -60,23 +60,18 @@ class EmployeesListFragment : BaseFragment() {
                 is EmployeeState.OnFetchEmployees -> onFetchEmployees(employeeState.employees)
                 is EmployeeState.OnApiError -> onApiError()
                 is EmployeeState.OnLoading -> onLoading(employeeState.isLoading)
-                else -> {
-                    // do nothing
-                }
             }
         }
     }
 
     private fun onApiError() {
         adapter.resetList(emptyList())
-        showAlertDialog(
-            { // positive button
-                viewModel.fetchEmployees()
-            },
-            { // negative button
-                finish()
-            }
-        )
+        findNavController().navigate(EmployeesListFragmentDirections.actionEmployeesListFragmentToApiErrorFragment())
+    }
+
+    private fun fetchRefreshedEmployees() {
+        viewModel.setRefresh()
+        viewModel.fetchEmployees()
     }
 
     private fun onFetchEmployees(employees: List<Employee>) {
@@ -85,9 +80,7 @@ class EmployeesListFragment : BaseFragment() {
     }
 
     private fun onLoading(isLoading: Boolean) {
-        binding.run {
-            loading.loadingLayout.isVisible = isLoading
-        }
+        binding.loadingLayout.isVisible = isLoading
     }
 
 }
